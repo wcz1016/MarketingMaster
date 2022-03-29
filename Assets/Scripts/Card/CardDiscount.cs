@@ -8,8 +8,8 @@ public class CardDiscount : CardStrategy
 
     public override void Execution(PlayerIndex index)
     {
-        Gamedata instance = instances[(int)index];
-        int CurCustLev = instance.custLv;
+        GameData instance = instances[(int)index];
+        int CurCustLev = instance.counsumptionLevel;
         custlev = -(int)(CurCustLev * (1 - DiscountRate));
         base.Execution(index);
     }

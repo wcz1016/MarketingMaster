@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerOneData : Gamedata
+public class PlayerOneData : GameData
 {
     public static PlayerOneData instance = null;
     private void Awake()

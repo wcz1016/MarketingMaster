@@ -11,14 +11,14 @@ public class CardRival : CardStrategy
     public override void Execution(PlayerIndex index)
     {
         base.Execution(index);
-        Gamedata instance = instances[1 - (int)index];
+        GameData instance = instances[1 - (int)index];
         instance.buffs.Add(new CardBuff(popular, refer, cost, custlev, people, duration));
         //instance.cash -= cash;
-        instance.cost += enemy_cost;
-        instance.popular += enemy_popular;
-        instance.refer += enemy_refer;
+        instance.costPerRound += enemy_cost;
+        instance.popularity += enemy_popular;
+        instance.rating += enemy_refer;
         //instance.level += level;
-        instance.custLv += enemy_custlev;
-        instance.people += enemy_people;
+        instance.counsumptionLevel += enemy_custlev;
+        instance.customerFlow += enemy_people;
     }
 }

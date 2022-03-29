@@ -29,14 +29,14 @@ public class UIControl : MonoBehaviour
     public Cardlist cardlist;
     private void Start() {
         LeftCoinText.text = PlayerOneData.instance.cash.ToString();
-        LeftRatingText.text = PlayerOneData.instance.refer.ToString();
-        LeftHouseLvText.text = PlayerOneData.instance.level.ToString();
-        LeftPopularText.text = PlayerOneData.instance.popular.ToString();
+        LeftRatingText.text = PlayerOneData.instance.rating.ToString();
+        LeftHouseLvText.text = PlayerOneData.instance.shopLevel.ToString();
+        LeftPopularText.text = PlayerOneData.instance.popularity.ToString();
 
         RightCoinText.text = PlayerTwoData.instance.cash.ToString();
-        RightRatingText.text = PlayerTwoData.instance.refer.ToString();
-        RightHouseLvText.text = PlayerTwoData.instance.level.ToString();
-        RightPopularText.text = PlayerOneData.instance.popular.ToString();
+        RightRatingText.text = PlayerTwoData.instance.rating.ToString();
+        RightHouseLvText.text = PlayerTwoData.instance.shopLevel.ToString();
+        RightPopularText.text = PlayerOneData.instance.popularity.ToString();
     }
     public void ShowTime(){
         Canvas.SetActive(true);
@@ -47,14 +47,14 @@ public class UIControl : MonoBehaviour
         RightPopularImg.SetActive(true);
         
         LeftCoinText.text += " + " + PlayerOneData.instance.profit.ToString();
-        LeftRatingText.text = PlayerOneData.instance.refer.ToString();
-        LeftHouseLvText.text = PlayerOneData.instance.level.ToString();
-        LeftPopularText.text = PlayerOneData.instance.popular.ToString();
+        LeftRatingText.text = PlayerOneData.instance.rating.ToString();
+        LeftHouseLvText.text = PlayerOneData.instance.shopLevel.ToString();
+        LeftPopularText.text = PlayerOneData.instance.popularity.ToString();
 
         RightCoinText.text += " + " + PlayerTwoData.instance.profit.ToString();
-        RightRatingText.text = PlayerTwoData.instance.refer.ToString();
-        RightHouseLvText.text = PlayerTwoData.instance.level.ToString();
-        RightPopularText.text = PlayerTwoData.instance.popular.ToString();
+        RightRatingText.text = PlayerTwoData.instance.rating.ToString();
+        RightHouseLvText.text = PlayerTwoData.instance.shopLevel.ToString();
+        RightPopularText.text = PlayerTwoData.instance.popularity.ToString();
 
 
     }

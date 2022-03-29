@@ -2,3 +2,7 @@
 .vscode
 Library
 Temp
+.vs
+obj
+*.sln
+*.csproj

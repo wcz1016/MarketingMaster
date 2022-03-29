@@ -13,15 +13,15 @@ public class CardStrategy : Card
 
     //List<Gamedata> instances = new List<Gamedata>{PlayerOneData.instance, PlayerTwoData.instance};
     public override void Execution(PlayerIndex index){
-        Gamedata instance = instances[(int)index];
+        GameData instance = instances[(int)index];
         instance.buffs.Add(new CardBuff(popular, refer, cost, custlev, people, duration));
         instance.cash -= cash;
-        instance.cost += cost;
-        instance.popular += popular;
-        instance.refer += refer;
-        instance.level += level;
-        instance.custLv += custlev;
-        instance.people += people;
+        instance.costPerRound += cost;
+        instance.popularity += popular;
+        instance.rating += refer;
+        instance.shopLevel += level;
+        instance.counsumptionLevel += custlev;
+        instance.customerFlow += people;
 
     }
 }

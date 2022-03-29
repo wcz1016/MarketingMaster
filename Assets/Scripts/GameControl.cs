@@ -89,7 +89,7 @@ public class GameControl : MonoBehaviour
         if(!LeftHasSel){
             if(Input.GetKeyDown(KeyCode.A)){
                 LeftHasSel = true;
-                LeftArea.GetChild(0).GetComponent<Card>().Execution(CardAddress.PlayerIndex.PlayerOne);
+                LeftArea.GetChild(0).GetComponent<Card>().Execution(PlayerIndex.PlayerOne);
                 if (LeftArea.GetChild(0).GetComponent<Animator>() != null)
                     LeftArea.GetChild(0).GetComponent<Animator>().SetTrigger("issel");
                 
@@ -98,7 +98,7 @@ public class GameControl : MonoBehaviour
             }
             else if(Input.GetKeyDown(KeyCode.S)){
                 LeftHasSel = true;
-                LeftArea.GetChild(1).GetComponent<Card>().Execution(CardAddress.PlayerIndex.PlayerOne);
+                LeftArea.GetChild(1).GetComponent<Card>().Execution(PlayerIndex.PlayerOne);
                 if (LeftArea.GetChild(1).GetComponent<Animator>() != null)
                     LeftArea.GetChild(1).GetComponent<Animator>().SetTrigger("issel");
 
@@ -107,7 +107,7 @@ public class GameControl : MonoBehaviour
             }
             else if(Input.GetKeyDown(KeyCode.D)){
                 LeftHasSel = true;
-                LeftArea.GetChild(2).GetComponent<Card>().Execution(CardAddress.PlayerIndex.PlayerOne);
+                LeftArea.GetChild(2).GetComponent<Card>().Execution(PlayerIndex.PlayerOne);
                 if (LeftArea.GetChild(2).GetComponent<Animator>() != null)
                     LeftArea.GetChild(2).GetComponent<Animator>().SetTrigger("issel");
                 UIcontroler.destroyAllOtherCards(2, LeftArea);
@@ -122,7 +122,7 @@ public class GameControl : MonoBehaviour
         if(!RightHasSel){
             if(Input.GetKeyDown(KeyCode.LeftArrow)){
                 RightHasSel = true;
-                RightArea.GetChild(0).GetComponent<Card>().Execution(CardAddress.PlayerIndex.PlayerTwo);
+                RightArea.GetChild(0).GetComponent<Card>().Execution(PlayerIndex.PlayerTwo);
                 if(RightArea.GetChild(0).GetComponent<Animator>()!=null)
                     RightArea.GetChild(0).GetComponent<Animator>().SetTrigger("issel");
 
@@ -131,7 +131,7 @@ public class GameControl : MonoBehaviour
             }
             else if(Input.GetKeyDown(KeyCode.DownArrow)){
                 RightHasSel = true;
-                RightArea.GetChild(1).GetComponent<Card>().Execution(CardAddress.PlayerIndex.PlayerTwo);
+                RightArea.GetChild(1).GetComponent<Card>().Execution(PlayerIndex.PlayerTwo);
                 if (RightArea.GetChild(0).GetComponent<Animator>() != null)
                     RightArea.GetChild(1).GetComponent<Animator>().SetTrigger("issel");
 
@@ -140,7 +140,7 @@ public class GameControl : MonoBehaviour
             }
             else if(Input.GetKeyDown(KeyCode.RightArrow)){
                 RightHasSel = true;
-                RightArea.GetChild(2).GetComponent<Card>().Execution(CardAddress.PlayerIndex.PlayerTwo);
+                RightArea.GetChild(2).GetComponent<Card>().Execution(PlayerIndex.PlayerTwo);
                 if (RightArea.GetChild(0).GetComponent<Animator>() != null)
                     RightArea.GetChild(2).GetComponent<Animator>().SetTrigger("issel");
 
