@@ -2,12 +2,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class Card : MonoBehaviour
+public abstract class Card
 {
-    public abstract void Execution(PlayerIndex index);
+    public string Name { get; set; }
+    public string Description { get; set; }
 
-    private GameData getPlayerDataInstance(PlayerIndex index)
+    public abstract void Execute(PlayerIndex index);
+
+    protected GameData getPlayerDataInstance(PlayerIndex index)
     {
         return index == PlayerIndex.PlayerOne ? PlayerOneData.instance : (GameData)PlayerTwoData.instance;
+    }
+
+    public override string ToString()
+    {
+        return $"Name: {Name}\n" +
+            $"Description: {Description}";
     }
 }
