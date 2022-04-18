@@ -1503,7 +1503,7 @@ GameObject:
   - component: {fileID: 635487552}
   - component: {fileID: 635487551}
   m_Layer: 5
-  m_Name: Image
+  m_Name: WhiteMask
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3216,7 +3216,7 @@ GameObject:
   - component: {fileID: 1427753490}
   - component: {fileID: 1427753489}
   m_Layer: 5
-  m_Name: RounsNum
+  m_Name: RoundNum
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3948,10 +3948,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89980ef8e1675fd428ee6f5ee5ae2156, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  showtimetext: {fileID: 321545866}
+  ShowtimeText: {fileID: 321545866}
   GameOverText: {fileID: 322964556}
-  Canvas: {fileID: 635487550}
-  roundNumText: {fileID: 1427753489}
+  WhiteMask: {fileID: 635487550}
+  RoundNumText: {fileID: 1427753489}
   LeftRatingText: {fileID: 425995077}
   LeftCoinText: {fileID: 754645151}
   LeftHouseLvText: {fileID: 1218833493}
@@ -3962,7 +3962,6 @@ MonoBehaviour:
   RightHouseLvText: {fileID: 2004078043}
   RightPopularText: {fileID: 372437891}
   RightPopularImg: {fileID: 186571005}
-  cardlist: {fileID: 2063494676}
 --- !u!114 &2063494676
 MonoBehaviour:
   m_ObjectHideFlags: 0
