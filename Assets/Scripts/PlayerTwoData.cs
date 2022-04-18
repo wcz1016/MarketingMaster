@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class PlayerTwoData : GameData
 {
-    public static PlayerTwoData instance = null;
+    public static PlayerTwoData Instance = null;
     private void Awake()
     {
-        if (instance == null) instance = this;
+        if (Instance == null) Instance = this;
     }
 } 

@@ -885,6 +885,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4307204502992803858, guid: 0389620107966f14785a8e2833eceeb0,
         type: 3}
+      propertyPath: m_RootOrder
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 4307204502992803858, guid: 0389620107966f14785a8e2833eceeb0,
+        type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
@@ -900,6 +905,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4307204502992803858, guid: 0389620107966f14785a8e2833eceeb0,
         type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4307204502992803858, guid: 0389620107966f14785a8e2833eceeb0,
+        type: 3}
       propertyPath: m_LocalRotation.x
       value: 0
       objectReference: {fileID: 0}
@@ -912,16 +922,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalRotation.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4307204502992803858, guid: 0389620107966f14785a8e2833eceeb0,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4307204502992803858, guid: 0389620107966f14785a8e2833eceeb0,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 4307204502992803858, guid: 0389620107966f14785a8e2833eceeb0,
         type: 3}
@@ -1602,7 +1602,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &653559326
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1639,7 +1639,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 0565c04afe1222a49ba0a5e81cb308b2, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -1751,7 +1751,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 1
@@ -3742,7 +3742,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &2051961685
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3789,6 +3789,7 @@ GameObject:
   - component: {fileID: 2063494673}
   - component: {fileID: 2063494675}
   - component: {fileID: 2063494676}
+  - component: {fileID: 2063494677}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -3892,12 +3893,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f21a3929dce0ed4a9b7134a69563d2e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  LeftArea: {fileID: 1112404967}
-  RightArea: {fileID: 1112917382}
   waittime1: 3
   waittime2: 3
-  WinningRounds: 12
   PeopleControl: {fileID: 2051961684}
+  LeftCardKeys: 610000007300000064000000
+  RightCardKeys: 140100001201000013010000
 --- !u!114 &2063494673
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3911,14 +3911,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cash: 0
-  popular: 0
-  refer: 0
-  level: 0
-  cost: 0
-  addcost: 0
-  custLv: 0
-  people: 0
-  profit: 0
+  popularity: 0
+  rating: 0
+  shopLevel: 0
+  costPerRound: 0
+  consumptionLevel: 0
+  customerFlow: 0
 --- !u!114 &2063494674
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3932,14 +3930,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cash: 0
-  popular: 0
-  refer: 0
-  level: 0
-  cost: 0
-  addcost: 0
-  custLv: 0
-  people: 0
-  profit: 0
+  popularity: 0
+  rating: 0
+  shopLevel: 0
+  costPerRound: 0
+  consumptionLevel: 0
+  customerFlow: 0
 --- !u!114 &2063494675
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3956,13 +3952,11 @@ MonoBehaviour:
   GameOverText: {fileID: 322964556}
   Canvas: {fileID: 635487550}
   roundNumText: {fileID: 1427753489}
-  LeftArea: {fileID: 1112404967}
   LeftRatingText: {fileID: 425995077}
   LeftCoinText: {fileID: 754645151}
   LeftHouseLvText: {fileID: 1218833493}
   LeftPopularText: {fileID: 425099796}
   LeftpopularImg: {fileID: 562424584}
-  RightArea: {fileID: 1112917382}
   RightRatingText: {fileID: 1017183426}
   RightCoinText: {fileID: 247952265}
   RightHouseLvText: {fileID: 2004078043}
@@ -4022,6 +4016,25 @@ MonoBehaviour:
   - {fileID: 4266304013811861610, guid: 55ae12d071db0b84f954f350c7ddacfc, type: 3}
   - {fileID: 4266304013811861610, guid: 257cf2c286d386d48a43f308c5db2053, type: 3}
   - {fileID: 4266304013811861610, guid: cf1e68c38d594c342b6626196d715571, type: 3}
+--- !u!114 &2063494677
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2063494667}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e2e0364f87e097d458fec682435727da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AddressCardsCSV: {fileID: 4900000, guid: b461b8e1f90c5a9469d51070cdf1bc81, type: 3}
+  StrategyCardsCSV: {fileID: 4900000, guid: ac2e26a996f1df84aab09a2e86ecc2c8, type: 3}
+  RivalCardsCSV: {fileID: 0}
+  LeftCardArea: {fileID: 1112404967}
+  RightCardArea: {fileID: 1112917382}
+  CardContainerPrefab: {fileID: 4266304013811861610, guid: 147a355cc67edb24ea3fb69b1aab5e64,
+    type: 3}
 --- !u!1 &2064145418
 GameObject:
   m_ObjectHideFlags: 0
@@ -4112,6 +4125,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4731371675593926481, guid: 1d376818696c90a43862124cb604a179,
         type: 3}
+      propertyPath: m_RootOrder
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4731371675593926481, guid: 1d376818696c90a43862124cb604a179,
+        type: 3}
       propertyPath: m_LocalPosition.x
       value: -7.78
       objectReference: {fileID: 0}
@@ -4127,6 +4145,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4731371675593926481, guid: 1d376818696c90a43862124cb604a179,
         type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4731371675593926481, guid: 1d376818696c90a43862124cb604a179,
+        type: 3}
       propertyPath: m_LocalRotation.x
       value: 0
       objectReference: {fileID: 0}
@@ -4139,16 +4162,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalRotation.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4731371675593926481, guid: 1d376818696c90a43862124cb604a179,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4731371675593926481, guid: 1d376818696c90a43862124cb604a179,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 4731371675593926481, guid: 1d376818696c90a43862124cb604a179,
         type: 3}
@@ -4181,6 +4194,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5223644478772568045, guid: 1f60c1053ed409a40a2263b21df1f5f0,
         type: 3}
+      propertyPath: m_RootOrder
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 5223644478772568045, guid: 1f60c1053ed409a40a2263b21df1f5f0,
+        type: 3}
       propertyPath: m_LocalPosition.x
       value: 6.28
       objectReference: {fileID: 0}
@@ -4196,6 +4214,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5223644478772568045, guid: 1f60c1053ed409a40a2263b21df1f5f0,
         type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5223644478772568045, guid: 1f60c1053ed409a40a2263b21df1f5f0,
+        type: 3}
       propertyPath: m_LocalRotation.x
       value: 0
       objectReference: {fileID: 0}
@@ -4208,16 +4231,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalRotation.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5223644478772568045, guid: 1f60c1053ed409a40a2263b21df1f5f0,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5223644478772568045, guid: 1f60c1053ed409a40a2263b21df1f5f0,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 5223644478772568045, guid: 1f60c1053ed409a40a2263b21df1f5f0,
         type: 3}

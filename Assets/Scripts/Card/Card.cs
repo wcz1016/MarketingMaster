@@ -11,7 +11,7 @@ public abstract class Card
 
     protected GameData getPlayerDataInstance(PlayerIndex index)
     {
-        return index == PlayerIndex.PlayerOne ? PlayerOneData.instance : (GameData)PlayerTwoData.instance;
+        return index == PlayerIndex.PlayerOne ? PlayerOneData.Instance : (GameData)PlayerTwoData.Instance;
     }
 
     public override string ToString()

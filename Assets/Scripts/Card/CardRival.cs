@@ -2,23 +2,24 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CardRival : CardStrategy
+public class CardRival : StrategyCard
 {
     [Header("以下是对对手的影响")]
     public int enemy_popular;
     public int enemy_refer, enemy_cost, enemy_custlev, enemy_people;
 
-    public override void Execution(PlayerIndex index)
+    public override void Execute(PlayerIndex index)
     {
-        base.Execution(index);
-        GameData instance = instances[1 - (int)index];
-        instance.buffs.Add(new CardBuff(popular, refer, cost, custlev, people, duration));
+        base.Execute(index);
+        PlayerIndex rivalIndex = (index == PlayerIndex.PlayerOne) ? PlayerIndex.PlayerTwo : PlayerIndex.PlayerOne;
+        GameData rivalInstance = getPlayerDataInstance(rivalIndex);
+        //rivalInstance.buffs.Add(new CardBuff(PopularityAddition, RatingAddition, CostPerRoundAddtion, ConsumptionLevelAddition, CustomerFlowAddition, Duration));
         //instance.cash -= cash;
-        instance.costPerRound += enemy_cost;
-        instance.popularity += enemy_popular;
-        instance.rating += enemy_refer;
+        rivalInstance.costPerRound += enemy_cost;
+        rivalInstance.popularity += enemy_popular;
+        rivalInstance.rating += enemy_refer;
         //instance.level += level;
-        instance.counsumptionLevel += enemy_custlev;
-        instance.customerFlow += enemy_people;
+        rivalInstance.consumptionLevel += enemy_custlev;
+        rivalInstance.customerFlow += enemy_people;
     }
 }
