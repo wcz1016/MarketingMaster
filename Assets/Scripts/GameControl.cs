@@ -19,7 +19,7 @@ public class GameControl : MonoBehaviour
 
     [HideInInspector]
     // 设计成静态变量是不是有问题？
-    public static int roundsnum = 0;
+    public static int RoundsNum = 0;
 
     private GameState _gameState;
     private bool _leftHasSelected, _rightHasSelected;
@@ -36,7 +36,7 @@ public class GameControl : MonoBehaviour
 
     void Update()
     {
-        if (roundsnum > WinningRounds)
+        if (RoundsNum > WinningRounds)
         {
             GameOver();
             return;
@@ -94,7 +94,7 @@ public class GameControl : MonoBehaviour
         _rightHasExecuted = false;
         _rightCardIndex = -1;
 
-        CardManager.Instance.DrawCards(roundsnum);
+        CardManager.Instance.DrawCards(RoundsNum);
 
         SoundManager.Instance.CardAppearPlay();
 
@@ -151,13 +151,13 @@ public class GameControl : MonoBehaviour
 
         if (_leftHasExecuted && _rightHasExecuted)
         {
-            roundsnum++;
+            RoundsNum++;
             _gameState = GameState.EndRound;
             _isShowtime = true;
         }
 
         // TODO: 这个逻辑应该放在结束回合里
-        if (roundsnum > 10){
+        if (RoundsNum > 10){
             SoundManager.Instance.ChangeBGM();
         }
             

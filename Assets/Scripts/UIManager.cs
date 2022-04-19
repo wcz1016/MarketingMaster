@@ -65,13 +65,12 @@ public class UIManager : MonoBehaviour
     }
 
     public void StartNewRound(){
-        //SoundManager.instance.CardAppearPlay();
         WhiteMask.SetActive(false);
 
         LeftpopularImg.SetActive(false);
         RightPopularImg.SetActive(false);
 
-        RoundNumText.text = "回合" + GameControl.roundsnum.ToString();
+        RoundNumText.text = "回合" + GameControl.RoundsNum.ToString();
 
         LeftCoinText.text = PlayerOneData.Instance.cash.ToString();
         RightCoinText.text = PlayerTwoData.Instance.cash.ToString();
