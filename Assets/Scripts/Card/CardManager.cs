@@ -30,8 +30,8 @@ public class CardManager : MonoBehaviour
             Instance = this;
         }
 
-        roundIndexToCardList = new List<List<int>>(GameControl.WinningRounds);
-        for (int i = 0; i < GameControl.WinningRounds; i++)
+        roundIndexToCardList = new List<List<int>>();
+        for (int i = 0; i < GameControl.WinningRounds + 1; i++)
         {
             roundIndexToCardList.Add(new List<int>());
         }

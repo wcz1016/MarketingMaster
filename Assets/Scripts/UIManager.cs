@@ -82,5 +82,6 @@ public class UIManager : MonoBehaviour
         GameOverText.SetActive(true);
         //啊这样好蠢……
         RoundNumText.text = "";
+        ShowtimeText.SetActive(false);
     }
 }

@@ -11,7 +11,7 @@ public class GameControl : MonoBehaviour
     [Tooltip("展示阶段的持续时间")]
     public float waittime1, waittime2;
     [Tooltip("结束回合数")]
-    public static int WinningRounds = 12;
+    public static int WinningRounds = 11;
     public GameObject PeopleControl;
     public GameObject Canvas;
     public GameObject StartTip;
@@ -50,12 +50,6 @@ public class GameControl : MonoBehaviour
                 Canvas.GetComponent<UIManager>().enabled = true;
                 Destroy(StartTip);
             }
-            return;
-        }
-
-        if (RoundsNum > WinningRounds)
-        {
-            GameOver();
             return;
         }
 
@@ -100,8 +94,21 @@ public class GameControl : MonoBehaviour
         UIManager.Instance.ShowTime();
         SoundManager.Instance.CheerPlay();
         yield return new WaitForSeconds(waittime2);
-        
-        _gameState = GameState.StartRound;
+
+        RoundsNum++;
+
+        if (RoundsNum == 10)
+        {
+            SoundManager.Instance.ChangeBGM();
+        }
+
+        if (RoundsNum > WinningRounds)
+        {
+            GameOver();
+        } else
+        {
+            _gameState = GameState.StartRound;
+        }  
     }
 
     void StartNewRound()
@@ -168,16 +175,9 @@ public class GameControl : MonoBehaviour
 
         if (_leftHasExecuted && _rightHasExecuted)
         {
-            RoundsNum++;
             _gameState = GameState.EndRound;
             _isShowtime = true;
-        }
-
-        // TODO: 这个逻辑应该放在结束回合里
-        if (RoundsNum > 10){
-            SoundManager.Instance.ChangeBGM();
-        }
-            
+        }    
     }
 
     private void GameOver()
