@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System;
 using UnityEngine;
 using Random = UnityEngine.Random;
+using CsvHelper.Configuration;
 
 public class CardManager : MonoBehaviour
 {
@@ -40,8 +41,9 @@ public class CardManager : MonoBehaviour
 
         ReadAddressCard();
         ReadStrategyCard();
+        ReadRivalCard();
 
-        //DebugCard();
+        DebugCard();
     }
 
     private void ReadAddressCard()
@@ -74,6 +76,28 @@ public class CardManager : MonoBehaviour
             while (csv.Read())
             {
                 var strategyCard = csv.GetRecord<StrategyCard>();
+                allCards.Add(strategyCard);
+                ReadRoundsFromCSV(csv.GetField("AppearenceRound"), allCards.Count - 1);
+            }
+        }
+    }
+
+    private void ReadRivalCard()
+    {
+        var config = new CsvConfiguration(CultureInfo.InvariantCulture)
+        {
+            MissingFieldFound = null
+        };
+
+        using (var reader = new StreamReader(new MemoryStream((RivalCardsCSV.bytes))))
+        using (var csv = new CsvReader(reader, config))
+        {
+            csv.Read();
+            csv.ReadHeader();
+
+            while (csv.Read())
+            {
+                var strategyCard = csv.GetRecord<RivalCard>();
                 allCards.Add(strategyCard);
                 ReadRoundsFromCSV(csv.GetField("AppearenceRound"), allCards.Count - 1);
             }

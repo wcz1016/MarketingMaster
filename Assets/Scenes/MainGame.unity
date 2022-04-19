@@ -2248,7 +2248,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AddressCardsCSV: {fileID: 4900000, guid: b461b8e1f90c5a9469d51070cdf1bc81, type: 3}
   StrategyCardsCSV: {fileID: 4900000, guid: ac2e26a996f1df84aab09a2e86ecc2c8, type: 3}
-  RivalCardsCSV: {fileID: 0}
+  RivalCardsCSV: {fileID: 4900000, guid: 76826e5237e0d9d4e94811678e21dc8a, type: 3}
   LeftCardArea: {fileID: 1112404967}
   RightCardArea: {fileID: 1112917382}
   CardContainerPrefab: {fileID: 4266304013811861610, guid: 147a355cc67edb24ea3fb69b1aab5e64,

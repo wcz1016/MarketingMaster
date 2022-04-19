@@ -9,11 +9,11 @@ public class CardBuff
     public int PopularityAdjustment, RatingAdjustment;
     public int CostPerRoundAdjustment, ConsumptionLevelAdjustment, CustomerFlowAdjustment;
 
-    public CardBuff(int popularityAdjustmentlar, int ratingAdjustment, 
+    public CardBuff(int popularityAdjustment, int ratingAdjustment, 
         int costPerRoundAdjustment, int consumptionLevelAdjustment, 
         int customerFlowAdjustment, int duration)
     {
-        this.PopularityAdjustment = popularityAdjustmentlar;
+        this.PopularityAdjustment = popularityAdjustment;
         this.RatingAdjustment = ratingAdjustment;
         this.CostPerRoundAdjustment = costPerRoundAdjustment;
         this.ConsumptionLevelAdjustment = consumptionLevelAdjustment;

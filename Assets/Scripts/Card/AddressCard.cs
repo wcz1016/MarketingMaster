@@ -18,6 +18,7 @@ public class AddressCard : Card
         instance.shopLevel = ShopLevel;
         instance.consumptionLevel = ConsumptionLevel;
         instance.customerFlow = CustomerFlow;
+        instance.popularity = CustomerFlow * 5;
     }
 
     public override string ToString()

@@ -52,10 +52,6 @@ public class GameData: MonoBehaviour
     public void Roundover()
     {
         costPerRound = (int)(customerFlow * Mathf.Sqrt(shopLevel) * 6);
-
-        //???
-        if (GameControl.RoundsNum == 2) popularity = customerFlow * 5;
-
         popularity += customerFlow / 10 * (rating + 5) * shopLevel;
         rating += shopLevel;
         cash += CalProfit();
