@@ -12,7 +12,7 @@ public class Destroy : MonoBehaviour
         if(Input.anyKeyDown){
             gameObject.SetActive(false);
             gameCanvas.GetComponent<GameControl>().enabled = true;
-            gameCanvas.GetComponent<UIControl>().enabled = true;
+            gameCanvas.GetComponent<UIManager>().enabled = true;
         }
     }
 }

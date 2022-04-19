@@ -6,165 +6,174 @@ using UnityEngine.Audio;
 
 public class GameControl : MonoBehaviour
 {
-    public Transform LeftArea;
-    public Transform RightArea;
-    [Space]
-    [Tooltip("展示阶段的持续时间")]
-    public float waittime1,waittime2;
-    [Tooltip("结束回合数")]
-    public int WinningRounds = 12;
-    public GameObject PeopleControl;
-    bool LeftHasSel = false, RightHasSel = false;//代表左右双方是否已经选择好了卡牌
-    bool isshowtime, isround = true;
-    bool hasdrawncards;
-    [HideInInspector]
-    public static int roundsnum = 1;
-    
-    //public PeopleGeneration peopleController;
-    UIControl UIcontroler;
-    
-    //public PlayerOneData P1;
-    //public PlayerTwoData P2;
+    enum GameState { StartRound, InRound, EndRound }
 
+    [Tooltip("展示阶段的持续时间")]
+    public float waittime1, waittime2;
+    [Tooltip("结束回合数")]
+    public static int WinningRounds = 12;
+    public GameObject PeopleControl;
+
+    public List<KeyCode> LeftCardKeys;
+    public List<KeyCode> RightCardKeys;
+
+    [HideInInspector]
+    // 设计成静态变量是不是有问题？
+    public static int roundsnum = 0;
+
+    private GameState _gameState;
+    private bool _leftHasSelected, _rightHasSelected;
+    private bool _leftHasExecuted, _rightHasExecuted;
+    private int _leftCardIndex = -1, _rightCardIndex = -1;
+    private bool _isShowtime;
+
+    //public PeopleGeneration peopleController;
+    
     void Start()
     {
-        UIcontroler = GetComponent<UIControl>();
-        UIcontroler.initCard();
+        _gameState = GameState.StartRound;
     }
 
     void Update()
     {
-        if(isshowtime){
-            isshowtime = false;
-            StartCoroutine(EndRound());
+        if (roundsnum > WinningRounds)
+        {
+            GameOver();
+            return;
         }
-        if(isround){
-            StartRound();    
-        }
-        if(roundsnum > WinningRounds){
-            isshowtime = false;
-            isround = false;
-            UIcontroler.gameover();
+
+        switch(_gameState)
+        {
+            case GameState.StartRound:
+                StartNewRound();
+                break;
+            case GameState.InRound:
+                HandleInput();
+                break;
+            case GameState.EndRound:
+                if (_isShowtime)
+                {
+                    _isShowtime = false;
+                    StartCoroutine(EndRound());
+                }
+                break;
         }
     }
 
     IEnumerator EndRound()
     {
-        
-        PeopleGeneration.instance.changeToMIddle();
+        //PeopleGeneration.instance.changeToMIddle();
         yield return new WaitForSeconds(waittime1);
-        PlayerOneData.instance.Roundover();
-        PlayerTwoData.instance.Roundover();
+        PlayerOneData.Instance.Roundover();
+        PlayerTwoData.Instance.Roundover();
         
-        if (PlayerOneData.instance.cash > PlayerTwoData.instance.cash){
+        if (PlayerOneData.Instance.cash > PlayerTwoData.Instance.cash){
             Debug.Log("PlayerOne won this round");
-            PeopleGeneration.instance.changeTarget(0);
+            //PeopleGeneration.instance.changeTarget(0);
         }
-        else if(PlayerOneData.instance.cash < PlayerTwoData.instance.cash ){
+        else if(PlayerOneData.Instance.cash < PlayerTwoData.Instance.cash ){
             Debug.Log("PlayerTwo won this round");
-            PeopleGeneration.instance.changeTarget(1);
+            //PeopleGeneration.instance.changeTarget(1);
         }
             
+        CardManager.Instance.DestroyAllCards(PlayerIndex.PlayerOne);
+        CardManager.Instance.DestroyAllCards(PlayerIndex.PlayerTwo);
+
         Debug.Log("Showtime started");
-        
-        UIcontroler.ShowTime();
-        SoundManager.instance.CheerPlay();
+        UIManager.Instance.ShowTime();
+        SoundManager.Instance.CheerPlay();
         yield return new WaitForSeconds(waittime2);
-        SoundManager.instance.CardAppearPlay();
         
-        //开始下一轮回合
-        LeftHasSel = false;
-        RightHasSel = false;
-        isround = true;
-
-        UIcontroler.NewRound();
-        
-
+        _gameState = GameState.StartRound;
     }
 
+    void StartNewRound()
+    {
+        _leftHasExecuted = false;
+        _leftCardIndex = -1;
+        _rightHasExecuted = false;
+        _rightCardIndex = -1;
+
+        CardManager.Instance.DrawCards(roundsnum);
+
+        SoundManager.Instance.CardAppearPlay();
+
+        UIManager.Instance.StartNewRound();
+
+        _gameState = GameState.InRound;
+    }
 
     //负责处理一个回合的双方行动
-     void StartRound(){
-        
-        if(!LeftHasSel){
-            if(Input.GetKeyDown(KeyCode.A)){
-                LeftHasSel = true;
-                LeftArea.GetChild(0).GetComponent<Card>().Execution(PlayerIndex.PlayerOne);
-                if (LeftArea.GetChild(0).GetComponent<Animator>() != null)
-                    LeftArea.GetChild(0).GetComponent<Animator>().SetTrigger("issel");
-                
-                UIcontroler.destroyAllOtherCards(0, LeftArea);
-                SoundManager.instance.CardSelPlay();
+     void HandleInput(){
+        if (!_leftHasExecuted)
+        {
+            if (_leftCardIndex == -1)
+            {
+                for(int i = 0; i < LeftCardKeys.Count; i++)
+                {
+                    if (Input.GetKeyDown(LeftCardKeys[i]))
+                    {
+                        _leftCardIndex = i;
+                        SoundManager.Instance.CardSelPlay();
+                        break;
+                    }
+                }
             }
-            else if(Input.GetKeyDown(KeyCode.S)){
-                LeftHasSel = true;
-                LeftArea.GetChild(1).GetComponent<Card>().Execution(PlayerIndex.PlayerOne);
-                if (LeftArea.GetChild(1).GetComponent<Animator>() != null)
-                    LeftArea.GetChild(1).GetComponent<Animator>().SetTrigger("issel");
 
-                UIcontroler.destroyAllOtherCards(1, LeftArea);
-                SoundManager.instance.CardSelPlay();
-            }
-            else if(Input.GetKeyDown(KeyCode.D)){
-                LeftHasSel = true;
-                LeftArea.GetChild(2).GetComponent<Card>().Execution(PlayerIndex.PlayerOne);
-                if (LeftArea.GetChild(2).GetComponent<Animator>() != null)
-                    LeftArea.GetChild(2).GetComponent<Animator>().SetTrigger("issel");
-                UIcontroler.destroyAllOtherCards(2, LeftArea);
-                SoundManager.instance.CardSelPlay();
-            }
-            else if(Input.GetKeyDown(KeyCode.W)){
-                LeftHasSel = true;
-                UIcontroler.DestroyAllCards(LeftArea);
+            if (_leftCardIndex != -1)
+            {
+                CardManager.Instance.ExecuteCard(_leftCardIndex, PlayerIndex.PlayerOne);
+                _leftHasExecuted = true;
             }
         }
-        
-        if(!RightHasSel){
-            if(Input.GetKeyDown(KeyCode.LeftArrow)){
-                RightHasSel = true;
-                RightArea.GetChild(0).GetComponent<Card>().Execution(PlayerIndex.PlayerTwo);
-                if(RightArea.GetChild(0).GetComponent<Animator>()!=null)
-                    RightArea.GetChild(0).GetComponent<Animator>().SetTrigger("issel");
 
-                UIcontroler.destroyAllOtherCards(0, RightArea);
-                SoundManager.instance.CardSelPlay();
+        if (!_rightHasExecuted)
+        {
+            if (_rightCardIndex == -1)
+            {
+                for (int i = 0; i < RightCardKeys.Count; i++)
+                {
+                    if (Input.GetKeyDown(RightCardKeys[i]))
+                    {
+                        _rightCardIndex = i;
+                        SoundManager.Instance.CardSelPlay();
+                        break;
+                    }
+                }
             }
-            else if(Input.GetKeyDown(KeyCode.DownArrow)){
-                RightHasSel = true;
-                RightArea.GetChild(1).GetComponent<Card>().Execution(PlayerIndex.PlayerTwo);
-                if (RightArea.GetChild(0).GetComponent<Animator>() != null)
-                    RightArea.GetChild(1).GetComponent<Animator>().SetTrigger("issel");
 
-                UIcontroler.destroyAllOtherCards(1, RightArea);
-                SoundManager.instance.CardSelPlay();
-            }
-            else if(Input.GetKeyDown(KeyCode.RightArrow)){
-                RightHasSel = true;
-                RightArea.GetChild(2).GetComponent<Card>().Execution(PlayerIndex.PlayerTwo);
-                if (RightArea.GetChild(0).GetComponent<Animator>() != null)
-                    RightArea.GetChild(2).GetComponent<Animator>().SetTrigger("issel");
-
-                UIcontroler.destroyAllOtherCards(2, RightArea);
-                SoundManager.instance.CardSelPlay();
-            }
-            else if(Input.GetKeyDown(KeyCode.UpArrow)){
-                RightHasSel = true;
-                UIcontroler.DestroyAllCards(RightArea);
+            if (_rightCardIndex != -1)
+            {
+                CardManager.Instance.ExecuteCard(_rightCardIndex, PlayerIndex.PlayerTwo);
+                _rightHasExecuted = true;
             }
         }
-        
-        if(LeftHasSel && RightHasSel){
-            isshowtime = true;
-            isround = false;
+
+        if (_leftHasExecuted && _rightHasExecuted)
+        {
             roundsnum++;
+            _gameState = GameState.EndRound;
+            _isShowtime = true;
         }
 
-        if(roundsnum > 10){
-            SoundManager.instance.ChangeBGM();
+        // TODO: 这个逻辑应该放在结束回合里
+        if (roundsnum > 10){
+            SoundManager.Instance.ChangeBGM();
         }
             
     }
-    
 
+    private void GameOver()
+    {
+        Debug.Log("gameover");
 
+        SoundManager.Instance.winGamePlay();
+        
+        CardManager.Instance.DestroyAllCards(PlayerIndex.PlayerOne);
+        CardManager.Instance.DestroyAllCards(PlayerIndex.PlayerTwo);
+
+        UIManager.Instance.GameOver();
+
+        Application.Quit();
+    }
 }
