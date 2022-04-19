@@ -13,10 +13,12 @@ public class GameControl : MonoBehaviour
     [Tooltip("结束回合数")]
     public static int WinningRounds = 12;
     public GameObject PeopleControl;
+    public GameObject Canvas;
+    public GameObject StartTip;
 
     public List<KeyCode> LeftCardKeys;
     public List<KeyCode> RightCardKeys;
-
+ 
     [HideInInspector]
     // 设计成静态变量是不是有问题？
     public static int RoundsNum = 0;
@@ -24,18 +26,33 @@ public class GameControl : MonoBehaviour
     private GameState _gameState;
     private bool _leftHasSelected, _rightHasSelected;
     private bool _leftHasExecuted, _rightHasExecuted;
+    // selected card index, -1 means not selected any
     private int _leftCardIndex = -1, _rightCardIndex = -1;
     private bool _isShowtime;
+
+    private bool _showingTips;
 
     //public PeopleGeneration peopleController;
     
     void Start()
     {
+        _showingTips = true;
         _gameState = GameState.StartRound;
     }
 
     void Update()
     {
+        if (_showingTips)
+        {
+            if (Input.anyKeyDown)
+            {
+                _showingTips = false;
+                Canvas.GetComponent<UIManager>().enabled = true;
+                Destroy(StartTip);
+            }
+            return;
+        }
+
         if (RoundsNum > WinningRounds)
         {
             GameOver();
