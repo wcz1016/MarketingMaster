@@ -14,12 +14,13 @@ public class GameControl : MonoBehaviour
     public delegate void OnShowTimeEnd();
     public static event OnShowTimeEnd onShowTimeEnd;
 
+    public static GameControl Instance;
+
     [Tooltip("展示阶段的持续时间")]
     public float DisplayDuration;
-    public static float ShowTimeDuration = 3;
+    public float ShowTimeDuration;
     [Tooltip("结束回合数")]
-    public static int WinningRounds = 11;
-    public GameObject PeopleControl;
+    public int WinningRounds;
     public GameObject Canvas;
     public GameObject StartTip;
 
@@ -40,7 +41,15 @@ public class GameControl : MonoBehaviour
     private bool _showingTips;
 
     //public PeopleGeneration peopleController;
-    
+
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+    }
+
     void Start()
     {
         _showingTips = true;

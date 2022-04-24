@@ -32,7 +32,7 @@ public class CardManager : MonoBehaviour
         }
 
         roundIndexToCardList = new List<List<int>>();
-        for (int i = 0; i < GameControl.WinningRounds + 1; i++)
+        for (int i = 0; i < GameControl.Instance.WinningRounds + 1; i++)
         {
             roundIndexToCardList.Add(new List<int>());
         }

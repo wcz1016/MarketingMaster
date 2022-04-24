@@ -117,7 +117,7 @@ public class Folk : MonoBehaviour
             _state = FolkState.gather;
             _currentTarget = Random.Range(0, 1f) < leftProbability ? LeftShop.position : RightShop.position;
             float distance = (_currentTarget - (Vector2)gameObject.transform.position).magnitude;
-            float duration = GameControl.ShowTimeDuration - 1f;
+            float duration = GameControl.Instance.ShowTimeDuration - 1f;
             _deceleration = 2 * (distance - GatherSpeed * duration) / (duration * duration);
             // 还没处理好避撞，暂时只在向商店移动时进行碰撞检测，其他时候可以相互穿过或者重合
             GetComponent<CapsuleCollider2D>().enabled = true;
