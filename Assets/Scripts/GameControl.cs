@@ -8,8 +8,15 @@ public class GameControl : MonoBehaviour
 {
     enum GameState { StartRound, InRound, EndRound }
 
+    public delegate void OnShowTimeStart(float leftProbability);
+    public static event OnShowTimeStart onShowTimeStart;
+
+    public delegate void OnShowTimeEnd();
+    public static event OnShowTimeEnd onShowTimeEnd;
+
     [Tooltip("展示阶段的持续时间")]
-    public float waittime1, waittime2;
+    public float DisplayDuration;
+    public static float ShowTimeDuration = 3;
     [Tooltip("结束回合数")]
     public static int WinningRounds = 11;
     public GameObject PeopleControl;
@@ -73,27 +80,31 @@ public class GameControl : MonoBehaviour
 
     IEnumerator EndRound()
     {
-        //PeopleGeneration.instance.changeToMIddle();
-        yield return new WaitForSeconds(waittime1);
+        yield return new WaitForSeconds(DisplayDuration);
         PlayerOneData.Instance.Roundover();
         PlayerTwoData.Instance.Roundover();
         
-        if (PlayerOneData.Instance.cash > PlayerTwoData.Instance.cash){
-            Debug.Log("PlayerOne won this round");
-            //PeopleGeneration.instance.changeTarget(0);
-        }
-        else if(PlayerOneData.Instance.cash < PlayerTwoData.Instance.cash ){
-            Debug.Log("PlayerTwo won this round");
-            //PeopleGeneration.instance.changeTarget(1);
-        }
+        //if (PlayerOneData.Instance.cash > PlayerTwoData.Instance.cash){
+        //    Debug.Log("PlayerOne won this round");
+        //}
+        //else if(PlayerOneData.Instance.cash < PlayerTwoData.Instance.cash ){
+        //    Debug.Log("PlayerTwo won this round");
+        //}
             
         CardManager.Instance.DestroyAllCards(PlayerIndex.PlayerOne);
         CardManager.Instance.DestroyAllCards(PlayerIndex.PlayerTwo);
 
-        Debug.Log("Showtime started");
+        //Debug.Log("Showtime started");
+
+        float folkToLeftProbability = (float)PlayerOneData.Instance.CalProfit() /
+            (PlayerOneData.Instance.CalProfit() + PlayerTwoData.Instance.CalProfit());
+        Debug.Log(folkToLeftProbability);
+        onShowTimeStart.Invoke(folkToLeftProbability);
+
         UIManager.Instance.ShowTime();
         SoundManager.Instance.CheerPlay();
-        yield return new WaitForSeconds(waittime2);
+        yield return new WaitForSeconds(ShowTimeDuration);
+        onShowTimeEnd.Invoke();
 
         RoundsNum++;
 
@@ -131,45 +142,29 @@ public class GameControl : MonoBehaviour
      void HandleInput(){
         if (!_leftHasExecuted)
         {
-            if (_leftCardIndex == -1)
+            for(int i = 0; i < LeftCardKeys.Count; i++)
             {
-                for(int i = 0; i < LeftCardKeys.Count; i++)
+                if (Input.GetKeyDown(LeftCardKeys[i]))
                 {
-                    if (Input.GetKeyDown(LeftCardKeys[i]))
-                    {
-                        _leftCardIndex = i;
-                        SoundManager.Instance.CardSelPlay();
-                        break;
-                    }
+                    SoundManager.Instance.CardSelPlay();
+                    CardManager.Instance.ExecuteCard(i, PlayerIndex.PlayerOne);
+                    _leftHasExecuted = true;
+                    break;
                 }
-            }
-
-            if (_leftCardIndex != -1)
-            {
-                CardManager.Instance.ExecuteCard(_leftCardIndex, PlayerIndex.PlayerOne);
-                _leftHasExecuted = true;
-            }
+            }  
         }
 
         if (!_rightHasExecuted)
         {
-            if (_rightCardIndex == -1)
+            for (int i = 0; i < RightCardKeys.Count; i++)
             {
-                for (int i = 0; i < RightCardKeys.Count; i++)
+                if (Input.GetKeyDown(RightCardKeys[i]))
                 {
-                    if (Input.GetKeyDown(RightCardKeys[i]))
-                    {
-                        _rightCardIndex = i;
-                        SoundManager.Instance.CardSelPlay();
-                        break;
-                    }
+                    SoundManager.Instance.CardSelPlay();
+                    CardManager.Instance.ExecuteCard(i, PlayerIndex.PlayerTwo);
+                    _rightHasExecuted = true;
+                    break;
                 }
-            }
-
-            if (_rightCardIndex != -1)
-            {
-                CardManager.Instance.ExecuteCard(_rightCardIndex, PlayerIndex.PlayerTwo);
-                _rightHasExecuted = true;
             }
         }
 

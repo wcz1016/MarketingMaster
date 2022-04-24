@@ -43,7 +43,7 @@ public class CardManager : MonoBehaviour
         ReadStrategyCard();
         ReadRivalCard();
 
-        DebugCard();
+        //DebugCard();
     }
 
     private void ReadAddressCard()
@@ -125,8 +125,8 @@ public class CardManager : MonoBehaviour
             rightCardGameObject.GetComponent<CardContainer>().SetCard(rightCards[i]);
             rightCardGameObject.GetComponent<CardContainer>().PlayerIndex = PlayerIndex.PlayerTwo;
 
-            Debug.Log($"Player One Draw {i} card: {leftCards[i].Name}");
-            Debug.Log($"Player Two Draw {i} card: {rightCards[i].Name}");
+            //Debug.Log($"Player One Draw {i} card: {leftCards[i].Name}");
+            //Debug.Log($"Player Two Draw {i} card: {rightCards[i].Name}");
         }
     }
 
@@ -180,10 +180,10 @@ public class CardManager : MonoBehaviour
 
     public void ExecuteCard(int cardIndex, PlayerIndex playerIndex)
     {
-        Debug.Log($"{playerIndex} has executed card {cardIndex}");
+        //Debug.Log($"{playerIndex} has executed card {cardIndex}");
         var cardArea = playerIndex == PlayerIndex.PlayerOne ? LeftCardArea : RightCardArea;
         cardArea.GetChild(cardIndex).GetComponent<CardContainer>().ExecuteCard();
-        cardArea.GetChild(0).GetComponent<Animator>().SetTrigger("issel");
+        cardArea.GetChild(0).GetComponent<Animator>().SetTrigger("IsSelected");
         DestroyAllOtherCards(cardIndex, playerIndex);
     }
 
