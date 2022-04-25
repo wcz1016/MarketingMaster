@@ -70,7 +70,7 @@ public class UIManager : MonoBehaviour
         LeftpopularImg.SetActive(false);
         RightPopularImg.SetActive(false);
 
-        RoundNumText.text = "回合" + GameControl.RoundsNum.ToString();
+        RoundNumText.text = "回合" + GameControl.Instance.RoundsNum.ToString();
 
         LeftCoinText.text = PlayerOneData.Instance.cash.ToString();
         RightCoinText.text = PlayerTwoData.Instance.cash.ToString();

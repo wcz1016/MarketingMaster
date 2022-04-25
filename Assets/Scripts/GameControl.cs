@@ -28,8 +28,7 @@ public class GameControl : MonoBehaviour
     public List<KeyCode> RightCardKeys;
  
     [HideInInspector]
-    // 设计成静态变量是不是有问题？
-    public static int RoundsNum = 0;
+    public int RoundsNum = 0;
 
     private GameState _gameState;
     private bool _leftHasSelected, _rightHasSelected;
