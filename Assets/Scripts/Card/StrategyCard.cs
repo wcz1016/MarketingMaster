@@ -27,7 +27,7 @@ public class StrategyCard : Card
     {
         GameData instance = getPlayerDataInstance(index);
 
-        instance.cash -= _cost;
+        instance.cash += _cost;
         instance.shopLevel += _shopLevelAddition;
 
         int customerFlowAdjustment = (int)(-instance.customerFlow * (1 - _customerFlowMultiplier))
