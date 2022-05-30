@@ -706,7 +706,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Show Time!
+  m_Text: Shopping Time!
 --- !u!222 &321545868
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -762,7 +762,8 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 1546274165}
   m_Father: {fileID: 1614671474}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1600,6 +1601,7 @@ MonoBehaviour:
   StartTip: {fileID: 329123841}
   LeftCardKeys: 610000007300000064000000
   RightCardKeys: 140100001201000013010000
+  RoundsNum: 0
 --- !u!4 &995715014
 Transform:
   m_ObjectHideFlags: 0
@@ -2169,7 +2171,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u6B22\u8FCE\u6765\u5230\u6A58\u5B50\u9547\uFF0C\u8BF7\u52AA\u529B\u5728\u8165\u98CE\u8840\u96E8\u7684\u4FBF\u5229\u5E97\u5546\u6218\u4E2D\u751F\u5B58\u4E0B\u6765\u5427\u3002\n\u5DE6\u8FB9\u73A9\u5BB6\u4F7F\u7528ASD\u9009\u62E9\u5361\u724C\n\u53F3\u8FB9\u73A9\u5BB6\u4F7F\u7528\u2190\u2193\u2192\u9009\u62E9\u5361\u724C\n10\u56DE\u5408\u540E\u5F97\u9AD8\u7684\u73A9\u5BB6\u5C06\u83B7\u80DC\uFF01\n\u6309\u4EFB\u610F\u952E\u7EE7\u7EED"
+  m_Text: "\u6B22\u8FCE\u6765\u5230\u6A58\u5B50\u9547\uFF0C\u8BF7\u52AA\u529B\u5728\u8165\u98CE\u8840\u96E8\u7684\u4FBF\u5229\u5E97\u5546\u6218\u4E2D\u751F\u5B58\u4E0B\u6765\u5427\u3002\n\u5DE6\u8FB9\u73A9\u5BB6\u4F7F\u7528ASD\u9009\u62E9\u5361\u724C\n\u53F3\u8FB9\u73A9\u5BB6\u4F7F\u7528\u2190\u2193\u2192\u9009\u62E9\u5361\u724C\n12\u56DE\u5408\u540E\u91D1\u94B1\u66F4\u591A\u7684\u73A9\u5BB6\u5C06\u83B7\u80DC\uFF01\n\u6309\u4EFB\u610F\u952E\u7EE7\u7EED"
 --- !u!222 &1223555002
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2695,6 +2697,84 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1546274164
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1546274165}
+  - component: {fileID: 1546274167}
+  - component: {fileID: 1546274166}
+  m_Layer: 5
+  m_Name: RestartText
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1546274165
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1546274164}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 322964557}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -0.0000076294, y: -113}
+  m_SizeDelta: {x: 493.23853, y: 121.71054}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1546274166
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1546274164}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_RaycastTarget: 1
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 40
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 4
+    m_MaxSize: 40
+    m_Alignment: 4
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: "\u6309 R \u952E\u5F00\u59CB\u65B0\u4E00\u5C40\n\u6309 Esc \u9000\u51FA\u6E38\u620F"
+--- !u!222 &1546274167
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1546274164}
+  m_CullTransparentMesh: 0
 --- !u!1 &1603341358
 GameObject:
   m_ObjectHideFlags: 0
@@ -3219,7 +3299,7 @@ MonoBehaviour:
   ShowtimeText: {fileID: 321545866}
   GameOverText: {fileID: 322964556}
   WhiteMask: {fileID: 635487550}
-  RoundNumText: {fileID: 1427753489}
+  RoundNumText: {fileID: 1427753487}
   LeftRatingText: {fileID: 425995077}
   LeftCoinText: {fileID: 754645151}
   LeftHouseLvText: {fileID: 1218833493}

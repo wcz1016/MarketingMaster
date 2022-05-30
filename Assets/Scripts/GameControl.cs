@@ -187,15 +187,13 @@ public class GameControl : MonoBehaviour
 
     private void OnGameOver()
     {
-        Debug.Log("gameover");
-
         SoundManager.Instance.WinGamePlay();
         
         CardManager.Instance.DestroyAllCards(PlayerIndex.PlayerOne);
         CardManager.Instance.DestroyAllCards(PlayerIndex.PlayerTwo);
 
         UIManager.Instance.GameOver();
-        GameObject.FindObjectOfType<FolkGenerator>().enabled = false;
+        FindObjectOfType<FolkGenerator>().enabled = false;
         _gameState = GameState.GameOver;
     }
 }

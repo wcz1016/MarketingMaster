@@ -10,7 +10,7 @@ public class UIManager : MonoBehaviour
     public GameObject ShowtimeText;
     public GameObject GameOverText;
     public GameObject WhiteMask;
-    public Text RoundNumText;
+    public GameObject RoundNumText;
     
     [Space] 
     public Text LeftRatingText;
@@ -70,7 +70,7 @@ public class UIManager : MonoBehaviour
         LeftpopularImg.SetActive(false);
         RightPopularImg.SetActive(false);
 
-        RoundNumText.text = "回合" + GameControl.Instance.RoundsNum.ToString();
+        RoundNumText.GetComponent<Text>().text = "回合" + (GameControl.Instance.RoundsNum + 1).ToString();
 
         LeftCoinText.text = PlayerOneData.Instance.cash.ToString();
         RightCoinText.text = PlayerTwoData.Instance.cash.ToString();
@@ -80,8 +80,20 @@ public class UIManager : MonoBehaviour
     
     public void GameOver() {   
         GameOverText.SetActive(true);
-        //啊这样好蠢……
-        RoundNumText.text = "";
+        RoundNumText.SetActive(false);
         ShowtimeText.SetActive(false);
+
+        if (PlayerOneData.Instance.cash > PlayerTwoData.Instance.cash)
+        {
+            GameOverText.GetComponent<Text>().text = "玩家一胜利";
+        }
+        else if (PlayerOneData.Instance.cash < PlayerTwoData.Instance.cash)
+        {
+            GameOverText.GetComponent<Text>().text = "玩家二胜利";
+        }
+        else
+        {
+            GameOverText.GetComponent<Text>().text = "平局";
+        }
     }
 }
