@@ -32,12 +32,12 @@ public class SoundManager : MonoBehaviour
         SoundEffectAudioSource.PlayOneShot(cheer);
     }
 
-    public void gameBeginPlay()
+    public void GameBeginPlay()
     {
         SoundEffectAudioSource.PlayOneShot(gameBegin);
     }
 
-    public void winGamePlay()
+    public void WinGamePlay()
     {
         SoundEffectAudioSource.PlayOneShot(winGame);
     }

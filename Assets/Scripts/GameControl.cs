@@ -3,10 +3,11 @@ using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.Audio;
+using UnityEngine.SceneManagement;
 
 public class GameControl : MonoBehaviour
 {
-    enum GameState { StartRound, InRound, EndRound }
+    enum GameState { StartGame, StartRound, InRound, EndRound, GameOver }
 
     public delegate void OnShowTimeStart(float leftProbability);
     public static event OnShowTimeStart onShowTimeStart;
@@ -33,11 +34,8 @@ public class GameControl : MonoBehaviour
     private GameState _gameState;
     private bool _leftHasSelected, _rightHasSelected;
     private bool _leftHasExecuted, _rightHasExecuted;
-    // selected card index, -1 means not selected any
-    private int _leftCardIndex = -1, _rightCardIndex = -1;
-    private bool _isShowtime;
 
-    private bool _showingTips;
+    private bool _isShowtime;
 
     //public PeopleGeneration peopleController;
 
@@ -51,25 +49,21 @@ public class GameControl : MonoBehaviour
 
     void Start()
     {
-        _showingTips = true;
-        _gameState = GameState.StartRound;
+        _gameState = GameState.StartGame;
     }
 
     void Update()
     {
-        if (_showingTips)
-        {
-            if (Input.anyKeyDown)
-            {
-                _showingTips = false;
-                Canvas.GetComponent<UIManager>().enabled = true;
-                Destroy(StartTip);
-            }
-            return;
-        }
-
         switch(_gameState)
         {
+            case GameState.StartGame:
+                if (Input.anyKeyDown)
+                {
+                    _gameState = GameState.StartRound;
+                    Canvas.GetComponent<UIManager>().enabled = true;
+                    Destroy(StartTip);
+                }
+                break;
             case GameState.StartRound:
                 StartNewRound();
                 break;
@@ -81,6 +75,16 @@ public class GameControl : MonoBehaviour
                 {
                     _isShowtime = false;
                     StartCoroutine(EndRound());
+                }
+                break;
+            case GameState.GameOver:
+                if (Input.GetKeyDown(KeyCode.R))
+                {
+                    SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+                }
+                if (Input.GetKeyDown(KeyCode.Escape))
+                {
+                    SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
                 }
                 break;
         }
@@ -106,7 +110,7 @@ public class GameControl : MonoBehaviour
 
         float folkToLeftProbability = (float)PlayerOneData.Instance.CalProfit() /
             (PlayerOneData.Instance.CalProfit() + PlayerTwoData.Instance.CalProfit());
-        Debug.Log(folkToLeftProbability);
+        
         onShowTimeStart.Invoke(folkToLeftProbability);
 
         UIManager.Instance.ShowTime();
@@ -123,7 +127,7 @@ public class GameControl : MonoBehaviour
 
         if (RoundsNum > WinningRounds)
         {
-            GameOver();
+            OnGameOver();
         } else
         {
             _gameState = GameState.StartRound;
@@ -133,9 +137,7 @@ public class GameControl : MonoBehaviour
     void StartNewRound()
     {
         _leftHasExecuted = false;
-        _leftCardIndex = -1;
         _rightHasExecuted = false;
-        _rightCardIndex = -1;
 
         CardManager.Instance.DrawCards(RoundsNum);
 
@@ -183,17 +185,17 @@ public class GameControl : MonoBehaviour
         }    
     }
 
-    private void GameOver()
+    private void OnGameOver()
     {
         Debug.Log("gameover");
 
-        SoundManager.Instance.winGamePlay();
+        SoundManager.Instance.WinGamePlay();
         
         CardManager.Instance.DestroyAllCards(PlayerIndex.PlayerOne);
         CardManager.Instance.DestroyAllCards(PlayerIndex.PlayerTwo);
 
         UIManager.Instance.GameOver();
-
-        Application.Quit();
+        GameObject.FindObjectOfType<FolkGenerator>().enabled = false;
+        _gameState = GameState.GameOver;
     }
 }

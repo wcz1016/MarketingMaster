@@ -65,11 +65,6 @@ public class Folk : MonoBehaviour
         Vector2 toTarget = _currentTarget - (Vector2)gameObject.transform.position;
         Vector2 velocity = Vector3.Normalize(toTarget) * IdleSpeed;
 
-        if (((int)toTarget.x ^ (int)rigidBody.velocity.x) < 0)
-        {
-            _animator.SetTrigger("IsTurningAroud");
-        }
-
         rigidBody.velocity = velocity;
 
         if (toTarget.magnitude < 0.1f)
